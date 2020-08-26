@@ -11,7 +11,7 @@ export default class cStar {
         this.options = {
             acceleration: starProps.acceleration ? starProps.acceleration : 1,
             accelerationFrameChange: starProps.accelerationFrameChange ? starProps.accelerationFrameChange : 0.1,
-            angle: starProps.angle ? starProps.angle : random.float(1, 3),
+            angle: starProps.angle ? starProps.angle : random.float(.5, 3),
             angleInterceptionChange: starProps.angleInterceptionChange ? starProps.angleInterceptionChange : 0.2,
             verticalDirection: starProps.verticalDirection ? starProps.verticalDirection : DOWN,
             horizontalDirection: starProps.horizontalDirection ? starProps.horizontalDirection : RIGHT,
@@ -23,20 +23,23 @@ export default class cStar {
         this.line = line;
         this.stage = stage;
         layer.add(this.konvaObject);
-        layer.draw();
+        this.konvaObject.cache();
+        this.konvaObject.perfectDrawEnabled(false);
+        this.konvaObject.listening(false);
+        layer.batchDraw();
         this.animation = null;
     }
 
     animate() {
         this.animation = new Konva.Animation((frame) => {
-            // const t = frame.time / 8;
+            if(!this.konvaObject.parent) this.destroy();
             let velocity = (frame.timeDiff / 20) * this.options.acceleration;
 
             // gravity effects
             this.options.acceleration += (this.options.verticalDirection)*this.options.accelerationFrameChange;
             if (this.options.acceleration <= 0){
                 this.options.verticalDirection = DOWN;
-                if(this.options.onDirectionChange)this.options.onDirectionChange();
+                if(this.options.onDirectionChange)this.options.onDirectionChange(this);
             }
 
             // virtual coords change
@@ -45,7 +48,7 @@ export default class cStar {
             if (this.interceptsWithLine()) {
                 this.options.verticalDirection = UP;
                 this.options.angle -= this.options.angleInterceptionChange;
-                if(this.options.onLineInterception) this.options.onLineInterception(this.coords);
+                if(this.options.onLineInterception) this.options.onLineInterception(this);
             }
 
             //real coords change
