@@ -1,17 +1,17 @@
 import Konva from 'konva';
 import CStar from './CStar';
-import {LEFT, RIGHT, UP} from '../directions';
+import {LEFT, RIGHT, UP, LINE_RATIO} from '../directions';
 import random from 'random';
 
 export default class Canvas {
-  constructor(id, text) {
+  constructor(id, text, img) {
     this.width = window.innerWidth;
     this.height = window.innerHeight;
 
     this.stage = new Konva.Stage({
       container: id,
       width: this.width,
-      height: this.height,
+      height: this.height + 20,
     });
 
     this.backLine = {
@@ -25,7 +25,7 @@ export default class Canvas {
     this.animatedLayer = null;
     this.textLayer = null;
 
-    this.img = './img/bg.png';
+    this.img = img;
     this.text = text;
 
     this.init();
@@ -40,8 +40,8 @@ export default class Canvas {
         x: 0,
         y: 0,
         image: imageObj,
-        width: 1920,
-        height: 862,
+        width: this.width,
+        height: this.height,
       });
 
       // add the shape to the layer
@@ -50,15 +50,15 @@ export default class Canvas {
     };
     imageObj.src = this.img;
     const x1 = 0;
-    const x2 = 1920;
-    const y1 = 580;
-    const y2 = 862;
+    const x2 = this.width;
+    const y1 = this.height*LINE_RATIO;
+    const y2 = this.height;
     this.backLine.offset = y1;
     this.backLine.angle = (y2 - y1) / (x2 - x1);
     const line = new Konva.Line({
       points: [x1, y1, x2, y2],
       stroke: '#ED5E5C',
-      strokeWidth: 15,
+      strokeWidth: 10,
     });
     this.imageLayer.add(line);
     this.stage.add(this.imageLayer);
@@ -85,7 +85,7 @@ export default class Canvas {
     simpleLabel.add(
         new Konva.Text({
           text: this.text,
-          fontSize: 60,
+          fontSize: 50,
           fontFamily: 'Montserrat',
           fill: '#FFFFFF',
           align: 'center',
@@ -109,7 +109,7 @@ export default class Canvas {
   }
 
   createStar() {
-    const baseX = random.int(10, 800);
+    const baseX = random.int(10, 400);
     const baseY = 50;
     const star = new CStar({
       x: baseX,
