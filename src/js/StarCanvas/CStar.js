@@ -4,7 +4,7 @@ import random from 'random';
 
 export default class CStar {
   constructor(konvaProps, starProps, layer, stage, line) {
-    this.konvaObject = new Konva.Star({...konvaProps});
+    this.konvaObject = new Konva.Star(konvaProps);
 
     this.coords = {x: konvaProps.x, y: konvaProps.y};
 
