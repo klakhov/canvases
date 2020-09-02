@@ -7,6 +7,8 @@ export class Canvas {
     this.width = dimensions.width;
     this.height = dimensions.height;
 
+    this.id = id;
+
     this.stage = new Konva.Stage({
       container: id,
       width: this.width,
@@ -36,21 +38,24 @@ export class Canvas {
       const canvas = document.getElementById(this.id);
       const rect = canvas.getBoundingClientRect();
       this.displayed = rect.bottom > 0;
+      if (!this.displayed) this.animatedLayer.destroyChildren();
     });
   }
 
   createBubble() {
     const radius = 30;
     const baseX = random.float(radius+10, this.width-radius-10);
-    const baseY = random.float(this.height-200, this.height-20);
+    const baseY = random.float(this.height-radius*2, this.height-radius);
     const bubble = new Bubble({
       x: baseX,
       y: baseY,
       radius: radius,
-      fill: 'red',
+      fill: '#ED5E5C',
     }, {
       radius: radius,
       baseY: baseY,
+      baseX: baseX,
+      parent: this,
     }, this.animatedLayer, this.stage);
     this.animatedLayer.add(bubble.konvaObject);
     bubble.animate();
