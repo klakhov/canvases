@@ -2,7 +2,7 @@ import Konva from 'konva';
 import Bubble from './Bubble';
 import random from 'random';
 
-export default class Canvas {
+export class Canvas {
   constructor(id, dimensions) {
     this.width = dimensions.width;
     this.height = dimensions.height;
@@ -31,6 +31,11 @@ export default class Canvas {
     document.addEventListener('visibilitychange', (e) => {
       this.displayed = !document.hidden;
       if (!this.displayed) this.animatedLayer.destroyChildren();
+    });
+    document.addEventListener('scroll', ()=>{
+      const canvas = document.getElementById(this.id);
+      const rect = canvas.getBoundingClientRect();
+      this.displayed = rect.bottom > 0;
     });
   }
 

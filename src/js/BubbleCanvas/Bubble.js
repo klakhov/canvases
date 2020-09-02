@@ -9,7 +9,7 @@ export default class Bubble {
 
     this.animation = null;
     this.konvaObject.perfectDrawEnabled(false);
-    this.konvaObject.listening(false);
+    this.konvaObject.on('mouseover', this.bubblePop.bind(this));
     layer.batchDraw();
   }
 
@@ -30,5 +30,10 @@ export default class Bubble {
   destroy() {
     this.konvaObject.destroy();
     this.animation.stop();
+  }
+
+  bubblePop(){
+    this.destroy();
+
   }
 }

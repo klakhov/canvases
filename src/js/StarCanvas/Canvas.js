@@ -3,10 +3,12 @@ import CStar from './CStar';
 import {LEFT, RIGHT, UP, LINE_RATIO} from '../directions';
 import random from 'random';
 
-export default class Canvas {
+export class Canvas {
   constructor(id, text, img) {
     this.width = window.innerWidth;
     this.height = window.innerHeight;
+
+    this.id = id;
 
     this.stage = new Konva.Stage({
       container: id,
@@ -105,6 +107,11 @@ export default class Canvas {
     document.addEventListener('visibilitychange', (e) => {
       this.displayed = !document.hidden;
       if (!this.displayed) this.animatedLayer.destroyChildren();
+    });
+    document.addEventListener('scroll', ()=>{
+      const canvas = document.getElementById(this.id);
+      const rect = canvas.getBoundingClientRect();
+      this.displayed = rect.bottom > 0;
     });
   }
 
