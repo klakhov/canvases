@@ -39,9 +39,12 @@ export default class Bubble {
     this.animation.stop();
   }
 
-  bubblePop(force=false) {
-    if (force || this.canPop) {
+  bubblePop(e, force=false) {
+    if (force || (this.canPop && this.parent.bubbleCanPop)) {
       this.parent.bubbleCanPop = false;
+      setTimeout(() =>{
+        this.parent.bubbleCanPop = true;
+      }, 50);
       this.konvaObject.destroy();
       this.animation.stop();
       this.layer.batchDraw();

@@ -15,6 +15,8 @@ export class Canvas {
       height: this.height,
     });
 
+    this.bubbleCanPop = true;
+
     this.displayed = true;
 
     this.animatedLayer = null;
