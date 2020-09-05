@@ -38,9 +38,11 @@ export class Canvas {
     });
     document.addEventListener('scroll', ()=>{
       const canvas = document.getElementById(this.id);
-      const rect = canvas.getBoundingClientRect();
-      this.displayed = rect.bottom > 0;
-      if (!this.displayed) this.animatedLayer.destroyChildren();
+      if (canvas) {
+        const rect = canvas.getBoundingClientRect();
+        this.displayed = rect.bottom > 0;
+        if (!this.displayed) this.animatedLayer.destroyChildren();
+      }
     });
   }
 
