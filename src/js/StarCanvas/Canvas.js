@@ -110,7 +110,7 @@ export class Canvas {
     });
     document.addEventListener('scroll', ()=>{
       const canvas = document.getElementById(this.id);
-      const rect = canvas.getBoundingClientRect();
+      const rect = canvas && canvas.getBoundingClientRect();
       this.displayed = rect.bottom > 0;
       if (!this.displayed) this.animatedLayer.destroyChildren();
     });
