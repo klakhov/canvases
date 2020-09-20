@@ -4,7 +4,7 @@ import {LEFT, RIGHT, UP, LINE_RATIO} from '../directions';
 import random from 'random';
 
 export class Canvas {
-  constructor(id, text, img) {
+  constructor(id, img) {
     this.width = window.innerWidth;
     this.height = window.innerHeight;
 
@@ -28,7 +28,7 @@ export class Canvas {
     this.textLayer = null;
 
     this.img = img;
-    this.text = text;
+    // this.text = text;
 
     this.init();
   }
@@ -102,7 +102,7 @@ export class Canvas {
   init() {
     this.createBackground();
     this.createAnimatedLayer();
-    this.createTextLayer();
+    // this.createTextLayer();
 
     document.addEventListener('visibilitychange', (e) => {
       this.displayed = !document.hidden;
