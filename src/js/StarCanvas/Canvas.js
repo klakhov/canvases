@@ -4,9 +4,9 @@ import {LEFT, RIGHT, UP, LINE_RATIO} from '../directions';
 import random from 'random';
 
 export class Canvas {
-  constructor(id, img) {
-    this.width = window.innerWidth;
-    this.height = window.innerHeight;
+  constructor(id, img, width=window.innerWidth, height=window.innerHeight) {
+    this.width = 1920;
+    this.height = 957;
 
     this.id = id;
 
