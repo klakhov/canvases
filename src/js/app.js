@@ -1,3 +1,4 @@
+// load star canvas
 // import Canvas from './StarCanvas/Canvas';
 
 // function start() {
@@ -7,14 +8,19 @@
 //   }, 1000);
 // }
 
-import Canvas from './BubbleCanvas/Canvas';
+// load bubble canvas
+// import Canvas from './BubbleCanvas/Canvas';
+//
+// function start() {
+//   const canvas = new Canvas('container', {width: 300, height: 600});
+//   setInterval(() => {
+//     if (canvas.displayed) canvas.createBubble();
+//   }, 1000);
+// }
+//
+// start();
 
+// load cube animation
+import cube from './Cube/Cube';
 
-function start(){
-  const canvas = new Canvas('container', {width: 300, height: 600});
-  setInterval(() => {
-    if (canvas.displayed) canvas.createBubble();
-  }, 1000);
-}
-
-start();
+cube('.drawing svg path');
