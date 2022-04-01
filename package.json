@@ -18,7 +18,7 @@
     "html-webpack-plugin": "^4.3.0",
     "konva": "^7.0.6",
     "mini-css-extract-plugin": "^0.10.0",
-    "node-sass": "^4.14.1",
+    "node-sass": "^7.0.0",
     "normalize.css": "^8.0.1",
     "random": "^2.2.0",
     "sass-loader": "^9.0.3",
